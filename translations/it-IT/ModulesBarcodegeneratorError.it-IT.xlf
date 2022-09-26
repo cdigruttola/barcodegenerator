@@ -8,8 +8,8 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="74d841e808f2b6110917c9b002a47cb7">
-        <source>An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products that have a two digits id for base product and max 9 combinations</source>
-        <target>Si è verificato un errore, a causa di limitazioni d'implementazione è possibile generare solo codici EAN 13 per i prodotti in combinazione che hanno 2 cifre per l'id del prodotto base e al massimo 9 combinazioni</target>
+        <source>An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes</source>
+        <target>Si è verificato un errore, a causa di limitazioni d'implementazione è possibile generare solo codici EAN 13 per i prodotti in combinazione la cui somma tra lunghezza id del prodotto base e lunghezza delle cifre del numero di combinazioni non ecceda 12 meno la somma della lunghezza dei due prefissi</target>
         <note>Line: </note>
       </trans-unit>
     </body>

@@ -103,19 +103,19 @@ class BarcodeGeneratorService
         }
 
         $prefix = $country_prefix . $company_prefix;
-        if ($id_variant !== -1) {
-            $prefixLen = strlen($prefix);
+        $prefixLen = strlen($prefix);
+        if ($id_variant !== -1) { //variant product
             $baseLen = strlen($id_base);
-
-            if ($baseLen > 2 || $id_variant > 9) {
+            $variantLen = strlen((string)$id_variant);
+            if ($baseLen + $variantLen > 12 - $prefixLen) {
                 throw new InvalidArgumentException('ID base product affected: ' . $id_base);
             }
 
-            $zeroEANLen = 12 - $prefixLen - 1; /*variant number*/
-
+            $zeroEANLen = 12 - $prefixLen - $variantLen; /*variant number*/
             $ean = $prefix . $id_variant . str_pad($id_base, $zeroEANLen, '0', STR_PAD_LEFT);
-        } else {
-            $ean = $prefix . str_pad($id_base, 3, '0', STR_PAD_LEFT);
+        } else { //base product
+            $zeroEANLen = 12 - $prefixLen;
+            $ean = $prefix . str_pad($id_base, $zeroEANLen, '0', STR_PAD_LEFT);
         }
 
         $sum = 0;

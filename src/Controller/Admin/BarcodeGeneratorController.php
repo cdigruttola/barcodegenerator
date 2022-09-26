@@ -63,7 +63,7 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
                 throw new Exception($this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', 'Modules.Barcodegenerator.Error'));
             }
         } catch (InvalidArgumentException $ex) {
-            throw new Exception($this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products that have a two digits id for base product and max 9 combinations', 'Modules.Barcodegenerator.Error') . $ex->getMessage());
+            throw new Exception($this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage());
         }
     }
 
