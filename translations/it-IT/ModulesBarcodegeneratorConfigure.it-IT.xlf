@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+    <body>
+      <trans-unit id="d2caed80612526b25718eb715de3fcdd">
+        <source>Barcode Generator</source>
+        <target>Barcode Generator</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="475d71813ad32c2f43294d3f007190b8">
+        <source>This module will help you to generate EAN codes for you products!</source>
+        <target>Questo modulo di aiuta nella generazione dei codici EAN 13 per i tuo prodotti!</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5b6cf869265c13af8566f192b4ab3d2a">
+        <source>Documentation</source>
+        <target>Documentazione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="dfc94e8224bbd24aa039a3c79fbb9d4e">
+        <source>You can get a PDF documentation to configure this module</source>
+        <target>Puoi scaricare la documentazione per configurare questo modulo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="78463a384a5aa4fad5fa73e2f506ecfc">
+        <source>English</source>
+        <target>Inglese</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4be8e06d27bca7e1828f2fa9a49ca985">
+        <source>Italian</source>
+        <target>Italiano</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="32b919d18cfaca89383f6000dcc9c031">
+        <source>Generate</source>
+        <target>Genera</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="972b66436ec5e99458debfcdb59bde3a">
+        <source>Generate EAN 13 codes on your products</source>
+        <target>Genera i codici EAN 13 sui tuoi prodotti</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

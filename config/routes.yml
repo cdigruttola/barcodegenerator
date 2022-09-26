@@ -1,0 +1,7 @@
+barcode_generate:
+  path: /barcode_generate
+  methods: [ GET ]
+  defaults:
+    _controller: 'cdigruttola\Module\Barcodegenerator\Controller\Admin\BarcodeGeneratorController::generateAction'
+    _legacy_controller: 'BarcodeGeneratorController'
+    _legacy_link: 'BarcodeGeneratorController'

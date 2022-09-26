@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    public: true
+
+  cdigruttola.barcodegenerator.admin.barcode_generator_service:
+    class: cdigruttola\Module\Barcodegenerator\Service\Admin\BarcodeGeneratorService

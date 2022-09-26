@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+    <body>
+      <trans-unit id="559f27e9166a4b229792c33b46622d4a">
+        <source>An error occurred during barcode generation, please check if country and company prefixes are set</source>
+        <target>Si è verificato un errore, verificare che i prefissi di nazione e azienda siano settati</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="74d841e808f2b6110917c9b002a47cb7">
+        <source>An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products that have a two digits id for base product and max 9 combinations</source>
+        <target>Si è verificato un errore, a causa di limitazioni d'implementazione è possibile generare solo codici EAN 13 per i prodotti in combinazione che hanno 2 cifre per l'id del prodotto base e al massimo 9 combinazioni</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+    <body>
+      <trans-unit id="d2caed80612526b25718eb715de3fcdd">
+        <source>Barcode Generator</source>
+        <target>Barcode Generator</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c6695ad0ec3dbdb216984865a61456dd">
+        <source>A module to generate barcode</source>
+        <target>Modulo per generare codici a barre</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb8956c67b82c7444a80c6b2433dd8b4">
+        <source>Are you sure you want to uninstall this module?</source>
+        <target>Vuoi disinstallare questo modulo?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e316b4398212d473f7f53c7728fe1c37">
+        <source>Settings updated succesfully</source>
+        <target>Impostazioni aggiornate con successo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="003b06dcfe67596f17e3de26e6a436c8">
+        <source>Error occurred during settings update</source>
+        <target>È avvenuto un errore durante l'aggiornamento delle impostazioni</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
+        <source>Settings</source>
+        <target>Impostazioni</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6ed72ca92d261ddb6b880244c0d3fcb0">
+        <source>Barcode Generator EAN</source>
+        <target>Genera EAN 13</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="de6d93f1a8a5cae4e491582e5f221131">
+        <source>Use this module to generate EAN codes</source>
+        <target>Usa questo modulo per generare codici EAN 13</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="00d23a76e43b46dae9ec7aa9dcbebb32">
+        <source>Enabled</source>
+        <target>Abilitato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b9f5c797ebbf55adccdd8539a65a0241">
+        <source>Disabled</source>
+        <target>Disabilitato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1982b4683ae957e96d8334824b2ce5b5">
+        <source>Replace current codes?</source>
+        <target>Sostituisci i codici attuali?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fb8e6782e91a211a60f5dfcddf76be92">
+        <source>Do you want to replace the EAN?</source>
+        <target>Vuoi sostituire i codici EAN 13?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ebf09eed91077555c13ccd59ee214bbe">
+        <source>Country Prefix</source>
+        <target>Prefisso Nazione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b41917a1015ebfc0820a486645edab0f">
+        <source>Enter the prefix for EAN (You can find them at www.gs1.org/company-prefix)</source>
+        <target>Inserisci il prefisso per EAN (Puoi trovarlo su www.gs1.org/company-prefix)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4fb85e53a8df6cb55e5a73c02a7db3ad">
+        <source>Company Prefix</source>
+        <target>Prefisso Azienda</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2f79b0b5f51b078938f5f20dfbbd367d">
+        <source>Enter the company prefix for EAN</source>
+        <target>Inserisci il prefisso aziendale per EAN</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
+        <source>Save</source>
+        <target>Salva</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
