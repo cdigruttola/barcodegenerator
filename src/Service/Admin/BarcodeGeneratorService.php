@@ -8,7 +8,6 @@ use Configuration;
 use Db;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use Module;
-use PDO;
 use PrestaShop\PrestaShop\Core\Domain\Module\Exception\ModuleException;
 use PrestaShop\PrestaShop\Core\Domain\Module\Exception\ModuleNotFoundException;
 use PrestaShop\PrestaShop\Core\Domain\Shop\Exception\ShopException;

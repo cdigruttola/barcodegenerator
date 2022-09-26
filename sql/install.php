@@ -22,7 +22,8 @@
  * @copyright 2007-2022 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-$sql = array();
+
+$sql = [];
 
 $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'barcodegenerator` (
     `id_barcodegenerator` int(11) NOT NULL AUTO_INCREMENT,
