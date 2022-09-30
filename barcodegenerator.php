@@ -42,6 +42,7 @@ class Barcodegenerator extends Module
         $this->version = '1.0.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
+        $this->module_key = '05df11732203e6e6bcdb690348257aa7';
 
         /**
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
@@ -195,6 +196,7 @@ class Barcodegenerator extends Module
                         'desc' => $this->trans('Enter the prefix for EAN (You can find them at www.gs1.org/company-prefix)', [], 'Modules.Barcodegenerator.Main'),
                         'name' => self::BARCODEGENERATOR_COUNTRY_PREFIX,
                         'required' => true,
+                        'validation' => 'isInt',
                     ],
                     [
                         'type' => 'text',
@@ -202,6 +204,7 @@ class Barcodegenerator extends Module
                         'desc' => $this->trans('Enter the company prefix for EAN', [], 'Modules.Barcodegenerator.Main'),
                         'name' => self::BARCODEGENERATOR_COMPANY_PREFIX,
                         'required' => true,
+                        'validation' => 'isInt',
                     ],
                 ],
                 'submit' => [
@@ -233,7 +236,7 @@ class Barcodegenerator extends Module
     {
         $country_prefix = Tools::getValue(self::BARCODEGENERATOR_COUNTRY_PREFIX);
         $company_prefix = Tools::getValue(self::BARCODEGENERATOR_COMPANY_PREFIX);
-        if (empty($country_prefix) || empty($company_prefix)) {
+        if (empty($country_prefix) || !Validate::isInt($country_prefix) || empty($company_prefix) || !Validate::isInt($company_prefix)) {
             return false;
         }
 
