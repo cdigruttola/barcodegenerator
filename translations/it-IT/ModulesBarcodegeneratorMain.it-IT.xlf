@@ -87,6 +87,11 @@
         <target>Salva</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="89ff4070b9d6805403b9c45c31eec099">
+        <source>Barcodes succesfully created</source>
+        <target>Codici a barre creati correttamente</target>
+        <note>Line: </note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

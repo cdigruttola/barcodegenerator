@@ -71,7 +71,7 @@ class Barcodegenerator extends Module
     public function install()
     {
         $this->_clearCache('*');
-        return parent::install();
+        return parent::install() && $this->registerHook('backOfficeHeader');
     }
 
     public function uninstall()
@@ -82,6 +82,21 @@ class Barcodegenerator extends Module
         Configuration::deleteByName(self::BARCODEGENERATOR_REPLACE_CODE);
 
         return parent::uninstall();
+    }
+
+
+    public function hookBackOfficeHeader()
+    {
+        if (Tools::getValue('module_name') == $this->name) {
+            $this->context->controller->addJS($this->_path . 'views/js/back.js');
+            $link = new Link();
+            $symfonyUrl = $link->getAdminLink('BarcodeGenerator', true, array('route' => 'barcode_generate'));
+
+            Media::addJsDef(
+                [
+                    'ajax_link' => $symfonyUrl,
+                ]);
+        }
     }
 
     /**
@@ -100,10 +115,6 @@ class Barcodegenerator extends Module
                 $output .= $this->displayError($this->trans('Error occurred during settings update', [], 'Modules.Barcodegenerator.Main'));
             }
         }
-
-        $link = new Link();
-        $symfonyUrl = $link->getAdminLink('BarcodeGenerator', true, array('route' => 'barcode_generate'));
-        $this->context->smarty->assign('url_generate', $symfonyUrl);
 
         $this->context->smarty->assign('module_dir', $this->_path);
 

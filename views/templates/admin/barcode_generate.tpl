@@ -24,8 +24,6 @@
 
 <div class="panel">
     <h3><i class="icon icon-AdminAttributeGenerator"></i> {l s='Generate' d='Modules.Barcodegenerator.Configure'}</h3>
-    <p>
-        <a class="btn btn-primary"
-           href="{$url_generate|escape:'htmlall':'UTF-8'}">{l s='Generate EAN 13 codes on your products' d='Modules.Barcodegenerator.Configure'}</a>
-    </p>
+    <div class="btn btn-primary"
+         id="barcode_generate">{l s='Generate EAN 13 codes on your products' d='Modules.Barcodegenerator.Configure'}</div>
 </div>

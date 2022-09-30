@@ -7,9 +7,9 @@
         <target>Si è verificato un errore, verificare che i prefissi di nazione e azienda siano settati</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="74d841e808f2b6110917c9b002a47cb7">
+      <trans-unit id="5d28bf25af5c7fe9f35cfd5ddf0cdcb7">
         <source>An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes</source>
-        <target>Si è verificato un errore, a causa di limitazioni d'implementazione è possibile generare solo codici EAN 13 per i prodotti in combinazione la cui somma tra lunghezza id del prodotto base e lunghezza delle cifre del numero di combinazioni non ecceda 12 meno la somma della lunghezza dei due prefissi</target>
+        <target>Si è verificato un errore, a causa dei limiti di implementazione è possibile generare verificare codice EAN 13 dove la somma della lunghezza id prodotto base e della lunghezza cifre del numero di combinazioni è minore della sottrazione tra 12 e la somma delle lunghezze dei due prefissi.</target>
         <note>Line: </note>
       </trans-unit>
     </body>

@@ -31,8 +31,8 @@ use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShopException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Controller responsible for barcode generation.
@@ -44,7 +44,7 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
      *
      * @param Request $request
      *
-     * @return Response
+     * @return JsonResponse
      * @throws PrestaShopException
      * @throws Exception
      */
@@ -54,16 +54,14 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
          * @var $generator_service BarcodeGeneratorService
          */
         $generator_service = $this->get('cdigruttola.barcodegenerator.admin.barcode_generator_service');
-
-        $url = $request->server->get('HTTP_REFERER');
         try {
             if ($generator_service->generateAndFill()) {
-                return $this->redirect($url, Response::HTTP_CREATED);
+                return new JsonResponse(['success' => true, 'message' => $this->trans('Barcodes succesfully created', 'Modules.Barcodegenerator.Main')]);
             } else {
-                throw new Exception($this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', 'Modules.Barcodegenerator.Error'));
+                return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', 'Modules.Barcodegenerator.Error')]);
             }
         } catch (InvalidArgumentException $ex) {
-            throw new Exception($this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage());
+            return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage()]);
         }
     }
 
