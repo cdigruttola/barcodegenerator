@@ -71,7 +71,7 @@ class Barcodegenerator extends Module
     public function install()
     {
         $this->_clearCache('*');
-        return parent::install() && $this->registerHook('backOfficeHeader');
+        return parent::install() && $this->registerHook('displayBackOfficeHeader');
     }
 
     public function uninstall()
@@ -85,7 +85,7 @@ class Barcodegenerator extends Module
     }
 
 
-    public function hookBackOfficeHeader()
+    public function hookDisplayBackOfficeHeader()
     {
         if (Tools::getValue('module_name') == $this->name) {
             $this->context->controller->addJS($this->_path . 'views/js/back.js');
