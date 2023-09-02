@@ -39,7 +39,7 @@ class Barcodegenerator extends Module
     {
         $this->name = 'barcodegenerator';
         $this->tab = 'market_place';
-        $this->version = '1.0.2';
+        $this->version = '1.0.3';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '05df11732203e6e6bcdb690348257aa7';
@@ -204,7 +204,7 @@ class Barcodegenerator extends Module
                     [
                         'type' => 'text',
                         'label' => $this->trans('Country Prefix', [], 'Modules.Barcodegenerator.Main'),
-                        'desc' => $this->trans('Enter the prefix for EAN (You can find them at www.gs1.org/company-prefix)', [], 'Modules.Barcodegenerator.Main'),
+                        'desc' => $this->trans('Enter the prefix for EAN (the first three digits of your GS1 prefix)', [], 'Modules.Barcodegenerator.Main'),
                         'name' => self::BARCODEGENERATOR_COUNTRY_PREFIX,
                         'required' => true,
                         'validation' => 'isInt',
@@ -212,7 +212,7 @@ class Barcodegenerator extends Module
                     [
                         'type' => 'text',
                         'label' => $this->trans('Company Prefix', [], 'Modules.Barcodegenerator.Main'),
-                        'desc' => $this->trans('Enter the company prefix for EAN', [], 'Modules.Barcodegenerator.Main'),
+                        'desc' => $this->trans('Enter the company prefix for EAN (the remaining digits after the first three)', [], 'Modules.Barcodegenerator.Main'),
                         'name' => self::BARCODEGENERATOR_COMPANY_PREFIX,
                         'required' => true,
                         'validation' => 'isInt',

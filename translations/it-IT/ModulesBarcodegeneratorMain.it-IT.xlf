@@ -68,8 +68,8 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="b41917a1015ebfc0820a486645edab0f">
-        <source>Enter the prefix for EAN (You can find them at www.gs1.org/company-prefix)</source>
-        <target>Inserisci il prefisso per EAN (Puoi trovarlo su www.gs1.org/company-prefix)</target>
+        <source>Enter the prefix for EAN (the first three digits of your GS1 prefix)</source>
+        <target>Inserisci il prefisso per EAN (le prime tre cifre del tuo prefisso GS1)</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="4fb85e53a8df6cb55e5a73c02a7db3ad">
@@ -78,8 +78,8 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="2f79b0b5f51b078938f5f20dfbbd367d">
-        <source>Enter the company prefix for EAN</source>
-        <target>Inserisci il prefisso aziendale per EAN</target>
+        <source>Enter the company prefix for EAN (the remaining digits after the first three)</source>
+        <target>Inserisci il prefisso aziendale per EAN (le restanti cifre dopo le prime tre)</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
