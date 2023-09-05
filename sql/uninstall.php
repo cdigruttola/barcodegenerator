@@ -28,7 +28,6 @@
  * Maybe the merchant will just try to reset the module
  * but does not want to loose all of the data associated to the module.
  */
-
 $sql = [];
 
 foreach ($sql as $query) {

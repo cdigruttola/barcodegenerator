@@ -22,7 +22,6 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -44,7 +43,7 @@ class Barcodegenerator extends Module
         $this->need_instance = 0;
         $this->module_key = '05df11732203e6e6bcdb690348257aa7';
 
-        /**
+        /*
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
          */
         $this->bootstrap = true;
@@ -71,6 +70,7 @@ class Barcodegenerator extends Module
     public function install()
     {
         $this->_clearCache('*');
+
         return parent::install() && $this->registerHook('displayBackOfficeHeader');
     }
 
@@ -84,13 +84,12 @@ class Barcodegenerator extends Module
         return parent::uninstall();
     }
 
-
     public function hookDisplayBackOfficeHeader()
     {
         if (Tools::getValue('module_name') == $this->name) {
             $this->context->controller->addJS($this->_path . 'views/js/back.js');
             $link = new Link();
-            $symfonyUrl = $link->getAdminLink('BarcodeGenerator', true, array('route' => 'barcode_generate'));
+            $symfonyUrl = $link->getAdminLink('BarcodeGenerator', true, ['route' => 'barcode_generate']);
 
             Media::addJsDef(
                 [
@@ -108,7 +107,7 @@ class Barcodegenerator extends Module
          * If values have been submitted in the form, process.
          */
         $output = '';
-        if ((Tools::isSubmit('submitBarcodegeneratorModule'))) {
+        if (Tools::isSubmit('submitBarcodegeneratorModule')) {
             if ($this->postProcess()) {
                 $output .= $this->displayConfirmation($this->trans('Settings updated succesfully', [], 'Modules.Barcodegenerator.Main'));
             } else {
@@ -179,7 +178,7 @@ class Barcodegenerator extends Module
                                 'id' => 'ean_off',
                                 'value' => false,
                                 'label' => $this->trans('Disabled', [], 'Modules.Barcodegenerator.Main'),
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -198,7 +197,7 @@ class Barcodegenerator extends Module
                                 'id' => 'replace_off',
                                 'value' => false,
                                 'label' => $this->trans('Disabled', [], 'Modules.Barcodegenerator.Main'),
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -230,7 +229,7 @@ class Barcodegenerator extends Module
      */
     protected function getConfigFormValues()
     {
-        $id_shop = (int)$this->context->shop->id;
+        $id_shop = (int) $this->context->shop->id;
 
         return [
             self::BARCODEGENERATOR_EAN => Configuration::get(self::BARCODEGENERATOR_EAN, null, null, $id_shop),
@@ -256,6 +255,7 @@ class Barcodegenerator extends Module
         foreach (array_keys($form_values) as $key) {
             $res &= Configuration::updateValue($key, Tools::getValue($key));
         }
+
         return $res;
     }
 }

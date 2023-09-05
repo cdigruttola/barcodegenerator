@@ -26,11 +26,9 @@
 namespace cdigruttola\Module\Barcodegenerator\Controller\Admin;
 
 use cdigruttola\Module\Barcodegenerator\Service\Admin\BarcodeGeneratorService;
-use Exception;
-use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
-use PrestaShopException;
+use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -45,8 +43,9 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
      * @param Request $request
      *
      * @return JsonResponse
-     * @throws PrestaShopException
-     * @throws Exception
+     *
+     * @throws \PrestaShopException
+     * @throws \Exception
      */
     public function generateAction(Request $request)
     {
@@ -64,5 +63,4 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
             return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage()]);
         }
     }
-
 }
