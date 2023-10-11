@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin-dev" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
       <trans-unit id="559f27e9166a4b229792c33b46622d4a">
         <source>An error occurred during barcode generation, please check if country and company prefixes are set</source>

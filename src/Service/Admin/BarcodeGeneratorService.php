@@ -80,19 +80,24 @@ class BarcodeGeneratorService
             $product = new \Product($raw_product['id_product']);
 
             if (\Configuration::get(\Barcodegenerator::BARCODEGENERATOR_EAN) && ($replace_existing || !$raw_product['ean13'])) {
-                $ean = $this->genEAN($product->id);
+                $id = $product->id;
+                if (\Configuration::get(\Barcodegenerator::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID)) {
+                    $id = (int) \Configuration::get(\Barcodegenerator::BARCODEGENERATOR_CUSTOM_ID);
+                }
+                $ean = $this->genEAN($id);
                 if (!$ean) {
                     return false;
                 }
                 $product->ean13 = $ean;
                 $product->update();
+                \Configuration::updateValue(\Barcodegenerator::BARCODEGENERATOR_CUSTOM_ID, $id + 1);
 
                 // Variants EAN calculation
                 $attributeIds = \Product::getProductAttributesIds($product->id);
                 if (!empty($attributeIds)) {
                     for ($i = 0; $i < count($attributeIds); ++$i) {
                         $combination = new \CombinationCore($attributeIds[$i]['id_product_attribute']);
-                        $ean = $this->genEAN($product->id, $i + 1);
+                        $ean = $this->genEAN($id, $i + 1);
                         if (!$ean) {
                             return false;
                         }

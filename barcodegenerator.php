@@ -29,6 +29,8 @@ if (!defined('_PS_VERSION_')) {
 class Barcodegenerator extends Module
 {
     public const BARCODEGENERATOR_EAN = 'BARCODEGENERATOR_EAN';
+    public const BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID = 'BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID';
+    public const BARCODEGENERATOR_CUSTOM_ID = 'BARCODEGENERATOR_CUSTOM_ID';
     public const BARCODEGENERATOR_REPLACE_CODE = 'BARCODEGENERATOR_REPLACE_CODE';
     public const BARCODEGENERATOR_COUNTRY_PREFIX = 'BARCODEGENERATOR_COUNTRY_PREFIX';
     public const BARCODEGENERATOR_COMPANY_PREFIX = 'BARCODEGENERATOR_COMPANY_PREFIX';
@@ -38,7 +40,7 @@ class Barcodegenerator extends Module
     {
         $this->name = 'barcodegenerator';
         $this->tab = 'market_place';
-        $this->version = '1.0.3';
+        $this->version = '1.0.4';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '05df11732203e6e6bcdb690348257aa7';
@@ -80,6 +82,8 @@ class Barcodegenerator extends Module
         Configuration::deleteByName(self::BARCODEGENERATOR_COMPANY_PREFIX);
         Configuration::deleteByName(self::BARCODEGENERATOR_EAN);
         Configuration::deleteByName(self::BARCODEGENERATOR_REPLACE_CODE);
+        Configuration::deleteByName(self::BARCODEGENERATOR_CUSTOM_ID);
+        Configuration::deleteByName(self::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID);
 
         return parent::uninstall();
     }
@@ -201,6 +205,33 @@ class Barcodegenerator extends Module
                         ],
                     ],
                     [
+                        'type' => 'switch',
+                        'label' => $this->trans('Use Product ID or the custom ID value', [], 'Modules.Barcodegenerator.Main'),
+                        'name' => self::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID,
+                        'is_bool' => true,
+                        'desc' => $this->trans('Do you want to product ID or the custom ID below?', [], 'Modules.Barcodegenerator.Main'),
+                        'values' => [
+                            [
+                                'id' => 'product_id',
+                                'value' => false,
+                                'label' => $this->trans('Product ID', [], 'Modules.Barcodegenerator.Main'),
+                            ],
+                            [
+                                'id' => 'starting_id',
+                                'value' => true,
+                                'label' => $this->trans('Custom ID', [], 'Modules.Barcodegenerator.Main'),
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => 'html',
+                        'label' => $this->trans('Custom value to use for generation', [], 'Modules.Barcodegenerator.Main'),
+                        'desc' => $this->trans('Set this field only if you choose custom ID. This value will be automatically update during generation', [], 'Modules.Barcodegenerator.Main'),
+                        'name' => self::BARCODEGENERATOR_CUSTOM_ID,
+                        'required' => false,
+                        'html_content' => '<input type="number" name="BARCODEGENERATOR_CUSTOM_ID" min="0" value="' . $this->getConfigFormValues()[self::BARCODEGENERATOR_CUSTOM_ID] . '"/>',
+                    ],
+                    [
                         'type' => 'text',
                         'label' => $this->trans('Country Prefix', [], 'Modules.Barcodegenerator.Main'),
                         'desc' => $this->trans('Enter the prefix for EAN (the first three digits of your GS1 prefix)', [], 'Modules.Barcodegenerator.Main'),
@@ -236,6 +267,8 @@ class Barcodegenerator extends Module
             self::BARCODEGENERATOR_REPLACE_CODE => Configuration::get(self::BARCODEGENERATOR_REPLACE_CODE, null, null, $id_shop),
             self::BARCODEGENERATOR_COUNTRY_PREFIX => Configuration::get(self::BARCODEGENERATOR_COUNTRY_PREFIX, null, null, $id_shop),
             self::BARCODEGENERATOR_COMPANY_PREFIX => Configuration::get(self::BARCODEGENERATOR_COMPANY_PREFIX, null, null, $id_shop),
+            self::BARCODEGENERATOR_CUSTOM_ID => Configuration::get(self::BARCODEGENERATOR_CUSTOM_ID, null, null, $id_shop),
+            self::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID => Configuration::get(self::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID, null, null, $id_shop),
         ];
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin-dev" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
       <trans-unit id="d2caed80612526b25718eb715de3fcdd">
         <source>Barcode Generator</source>
@@ -62,12 +62,42 @@
         <target>Vuoi sostituire i codici EAN 13?</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="7d0d4cca08d60c85acdccc19e567f466">
+        <source>Use Product ID or the custom ID value</source>
+        <target>Utilizza ID prodotto o ID custom</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6b803d4146ba0c8bb2a18e9ffcea12d5">
+        <source>Do you want to product ID or the custom ID below?</source>
+        <target>Vuoi usare ID Prodotto o il ID custom di seguito?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="97f08a40f22a625d0cbfe03db3349108">
+        <source>Product ID</source>
+        <target>ID Prodotto</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="af3a625e5563c2d2c988c9f80d342c41">
+        <source>Custom ID</source>
+        <target>ID custom</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="178904e2d1fb4b933aab2ef24be7d19c">
+        <source>Custom value to use for generation</source>
+        <target>Valore custom da usare per la generazione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="830fe6093284796271a080457de9180a">
+        <source>Set this field only if you choose custom ID. This value will be automatically update during generation</source>
+        <target>Imposta questo campo se scegli ID custom. Questo valore verrà aggiornato automaticamente durante la generazione</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="ebf09eed91077555c13ccd59ee214bbe">
         <source>Country Prefix</source>
         <target>Prefisso Nazione</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="b41917a1015ebfc0820a486645edab0f">
+      <trans-unit id="41a2d87304e56ae10b05d6a68014a198">
         <source>Enter the prefix for EAN (the first three digits of your GS1 prefix)</source>
         <target>Inserisci il prefisso per EAN (le prime tre cifre del tuo prefisso GS1)</target>
         <note>Line: </note>
@@ -77,7 +107,7 @@
         <target>Prefisso Azienda</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="2f79b0b5f51b078938f5f20dfbbd367d">
+      <trans-unit id="bbb6d87cefd67a2fe3406c41136598ee">
         <source>Enter the company prefix for EAN (the remaining digits after the first three)</source>
         <target>Inserisci il prefisso aziendale per EAN (le restanti cifre dopo le prime tre)</target>
         <note>Line: </note>
