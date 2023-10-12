@@ -224,12 +224,12 @@ class Barcodegenerator extends Module
                         ],
                     ],
                     [
-                        'type' => 'html',
+                        'type' => 'text',
                         'label' => $this->trans('Custom value to use for generation', [], 'Modules.Barcodegenerator.Main'),
                         'desc' => $this->trans('Set this field only if you choose custom ID. This value will be automatically update during generation', [], 'Modules.Barcodegenerator.Main'),
                         'name' => self::BARCODEGENERATOR_CUSTOM_ID,
                         'required' => false,
-                        'html_content' => '<input type="number" name="BARCODEGENERATOR_CUSTOM_ID" min="0" value="' . $this->getConfigFormValues()[self::BARCODEGENERATOR_CUSTOM_ID] . '"/>',
+                        'validation' => 'isInt',
                     ],
                     [
                         'type' => 'text',

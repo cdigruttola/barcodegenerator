@@ -32,9 +32,13 @@ use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 /**
  * Controller responsible for barcode generation.
  */
+
 class BarcodeGeneratorController extends FrameworkBundleAdminController
 {
     /**

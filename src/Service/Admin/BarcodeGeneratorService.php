@@ -32,6 +32,10 @@ use PrestaShop\PrestaShop\Core\Domain\Shop\Exception\ShopException;
 use Product;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class BarcodeGeneratorService
 {
     /**
