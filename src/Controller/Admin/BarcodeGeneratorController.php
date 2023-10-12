@@ -38,7 +38,6 @@ if (!defined('_PS_VERSION_')) {
 /**
  * Controller responsible for barcode generation.
  */
-
 class BarcodeGeneratorController extends FrameworkBundleAdminController
 {
     /**
