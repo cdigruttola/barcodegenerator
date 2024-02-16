@@ -2,5 +2,45 @@ services:
   _defaults:
     public: true
 
+  cdigruttola.barcodegenerator.module:
+    class: Barcodegenerator
+    factory: [ 'Module', 'getInstanceByName' ]
+    public: false
+    arguments:
+      - 'barcodegenerator'
+
+  cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController:
+    public: true
+    class: cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController
+    arguments:
+      - "@=service('prestashop.adapter.legacy.context').getLanguages(false)"
+      - "@cdigruttola.barcodegenerator.module"
+
   cdigruttola.barcodegenerator.admin.barcode_generator_service:
-    class: cdigruttola\Module\Barcodegenerator\Service\Admin\BarcodeGeneratorService
+    class: cdigruttola\Barcodegenerator\Service\Admin\BarcodeGeneratorService
+
+  cdigruttola.barcodegenerator.form.configuration_type.form_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\Handler'
+    arguments:
+      - '@form.factory'
+      - '@prestashop.core.hook.dispatcher'
+      - '@cdigruttola.barcodegenerator.configuration.form_provider'
+      - 'cdigruttola\Barcodegenerator\Form\BarcodeConfigurationType'
+      - 'BarcodeConfigurationForm'
+
+  cdigruttola.barcodegenerator.configuration.form_provider:
+    class: cdigruttola\Barcodegenerator\Form\Provider\BarcodeConfigurationFormDataProvider
+    arguments:
+      - '@cdigruttola.barcodegenerator.configuration'
+
+  cdigruttola.barcodegenerator.configuration:
+    class: cdigruttola\Barcodegenerator\Form\DataConfiguration\BarcodeConfigurationData
+    arguments:
+      - '@prestashop.adapter.legacy.configuration'
+
+  cdigruttola.barcodegenerator.form.configuration_type:
+    class: cdigruttola\Barcodegenerator\Form\BarcodeConfigurationType
+    parent: 'form.type.translatable.aware'
+    public: true
+    tags:
+      - { name: form.type }

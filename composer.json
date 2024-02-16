@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "cdigruttola\\Module\\Barcodegenerator\\": "src/"
+      "cdigruttola\\Barcodegenerator\\": "src/"
     },
     "classmap": [
       "barcodegenerator.php"

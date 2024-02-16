@@ -9,12 +9,12 @@ class ComposerStaticInitdc53b7cba5a8912de18efcea8ed74bd5
     public static $prefixLengthsPsr4 = array (
         'c' => 
         array (
-            'cdigruttola\\Module\\Barcodegenerator\\' => 36,
+            'cdigruttola\\Barcodegenerator\\' => 29,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'cdigruttola\\Module\\Barcodegenerator\\' => 
+        'cdigruttola\\Barcodegenerator\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -23,8 +23,11 @@ class ComposerStaticInitdc53b7cba5a8912de18efcea8ed74bd5
     public static $classMap = array (
         'Barcodegenerator' => __DIR__ . '/../..' . '/barcodegenerator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'cdigruttola\\Module\\Barcodegenerator\\Controller\\Admin\\BarcodeGeneratorController' => __DIR__ . '/../..' . '/src/Controller/Admin/BarcodeGeneratorController.php',
-        'cdigruttola\\Module\\Barcodegenerator\\Service\\Admin\\BarcodeGeneratorService' => __DIR__ . '/../..' . '/src/Service/Admin/BarcodeGeneratorService.php',
+        'cdigruttola\\Barcodegenerator\\Controller\\Admin\\BarcodeGeneratorController' => __DIR__ . '/../..' . '/src/Controller/Admin/BarcodeGeneratorController.php',
+        'cdigruttola\\Barcodegenerator\\Form\\BarcodeConfigurationType' => __DIR__ . '/../..' . '/src/Form/BarcodeConfigurationType.php',
+        'cdigruttola\\Barcodegenerator\\Form\\DataConfiguration\\BarcodeConfigurationData' => __DIR__ . '/../..' . '/src/Form/DataConfiguration/BarcodeConfigurationData.php',
+        'cdigruttola\\Barcodegenerator\\Form\\Provider\\BarcodeConfigurationFormDataProvider' => __DIR__ . '/../..' . '/src/Form/Provider/BarcodeConfigurationFormDataProvider.php',
+        'cdigruttola\\Barcodegenerator\\Service\\Admin\\BarcodeGeneratorService' => __DIR__ . '/../..' . '/src/Service/Admin/BarcodeGeneratorService.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'cdigruttola\\Module\\Barcodegenerator\\' => array($baseDir . '/src'),
+    'cdigruttola\\Barcodegenerator\\' => array($baseDir . '/src'),
 );

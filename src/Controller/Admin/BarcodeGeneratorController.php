@@ -23,14 +23,15 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace cdigruttola\Module\Barcodegenerator\Controller\Admin;
+namespace cdigruttola\Barcodegenerator\Controller\Admin;
 
-use cdigruttola\Module\Barcodegenerator\Service\Admin\BarcodeGeneratorService;
+use cdigruttola\Barcodegenerator\Service\Admin\BarcodeGeneratorService;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -40,6 +41,71 @@ if (!defined('_PS_VERSION_')) {
  */
 class BarcodeGeneratorController extends FrameworkBundleAdminController
 {
+
+    /**
+     * @var array
+     */
+    private $languages;
+    /** @var \Module */
+    private $module;
+
+    public function __construct($languages, $module)
+    {
+        parent::__construct();
+        $this->languages = $languages;
+        $this->module = $module;
+    }
+
+    public function index(): Response
+    {
+
+        $configurationForm = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->getForm();
+
+        return $this->render('@Modules/barcodegenerator/views/templates/admin/index.html.twig', [
+            'form' => $configurationForm->createView(),
+            'module_dir' => _MODULE_DIR_ . $this->module->name . '/',
+            'help_link' => false,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function saveConfiguration(Request $request): Response
+    {
+        $redirectResponse = $this->redirectToRoute('bocustomize_controller');
+
+        $form = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->getForm();
+        $form->handleRequest($request);
+
+        if (!$form->isSubmitted()) {
+            return $redirectResponse;
+        }
+
+        if ($form->isValid()) {
+            $data = $form->getData();
+            $saveErrors = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->save($data);
+
+            if (0 === count($saveErrors)) {
+                $this->addFlash('success', $this->trans('Successful update.', 'Admin.Notifications.Success'));
+
+                return $redirectResponse;
+            }
+        }
+
+        $formErrors = [];
+
+        foreach ($form->getErrors(true) as $error) {
+            $formErrors[] = $error->getMessage();
+        }
+
+        $this->flashErrors($formErrors);
+
+        return $redirectResponse;
+    }
+
     /**
      * @AdminSecurity("is_granted('read', request.get('_legacy_controller'))")
      *
@@ -52,9 +118,7 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
      */
     public function generateAction(Request $request)
     {
-        /**
-         * @var $generator_service BarcodeGeneratorService
-         */
+        /** @var $generator_service BarcodeGeneratorService */
         $generator_service = $this->get('cdigruttola.barcodegenerator.admin.barcode_generator_service');
         try {
             if ($generator_service->generateAndFill()) {

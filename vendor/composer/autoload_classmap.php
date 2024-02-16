@@ -8,6 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Barcodegenerator' => $baseDir . '/barcodegenerator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'cdigruttola\\Module\\Barcodegenerator\\Controller\\Admin\\BarcodeGeneratorController' => $baseDir . '/src/Controller/Admin/BarcodeGeneratorController.php',
-    'cdigruttola\\Module\\Barcodegenerator\\Service\\Admin\\BarcodeGeneratorService' => $baseDir . '/src/Service/Admin/BarcodeGeneratorService.php',
+    'cdigruttola\\Barcodegenerator\\Controller\\Admin\\BarcodeGeneratorController' => $baseDir . '/src/Controller/Admin/BarcodeGeneratorController.php',
+    'cdigruttola\\Barcodegenerator\\Form\\BarcodeConfigurationType' => $baseDir . '/src/Form/BarcodeConfigurationType.php',
+    'cdigruttola\\Barcodegenerator\\Form\\DataConfiguration\\BarcodeConfigurationData' => $baseDir . '/src/Form/DataConfiguration/BarcodeConfigurationData.php',
+    'cdigruttola\\Barcodegenerator\\Form\\Provider\\BarcodeConfigurationFormDataProvider' => $baseDir . '/src/Form/Provider/BarcodeConfigurationFormDataProvider.php',
+    'cdigruttola\\Barcodegenerator\\Service\\Admin\\BarcodeGeneratorService' => $baseDir . '/src/Service/Admin/BarcodeGeneratorService.php',
 );

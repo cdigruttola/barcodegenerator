@@ -23,13 +23,12 @@
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace cdigruttola\Module\Barcodegenerator\Service\Admin;
+namespace cdigruttola\Barcodegenerator\Service\Admin;
 
-use Db;
+use cdigruttola\Barcodegenerator\Form\DataConfiguration\BarcodeConfigurationData;
 use PrestaShop\PrestaShop\Core\Domain\Module\Exception\ModuleException;
 use PrestaShop\PrestaShop\Core\Domain\Module\Exception\ModuleNotFoundException;
 use PrestaShop\PrestaShop\Core\Domain\Shop\Exception\ShopException;
-use Product;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 
 if (!defined('_PS_VERSION_')) {
@@ -71,7 +70,7 @@ class BarcodeGeneratorService
      */
     public function generateAndFill(): bool
     {
-        $replace_existing = \Configuration::get(\Barcodegenerator::BARCODEGENERATOR_REPLACE_CODE);
+        $replace_existing = \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_REPLACE_CODE);
 
         $sql = 'SELECT `id_product`, `ean13` FROM `' . _DB_PREFIX_ . 'product` ';
         if (!$replace_existing) {
@@ -83,10 +82,10 @@ class BarcodeGeneratorService
         foreach ($raw_products as $raw_product) {
             $product = new \Product($raw_product['id_product']);
 
-            if (\Configuration::get(\Barcodegenerator::BARCODEGENERATOR_EAN) && ($replace_existing || !$raw_product['ean13'])) {
+            if ($replace_existing || !$raw_product['ean13']) {
                 $id = $product->id;
-                if (\Configuration::get(\Barcodegenerator::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID)) {
-                    $id = (int) \Configuration::get(\Barcodegenerator::BARCODEGENERATOR_CUSTOM_ID);
+                if (\Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID)) {
+                    $id = (int) \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_CUSTOM_ID);
                 }
                 $ean = $this->genEAN($id);
                 if (!$ean) {
@@ -94,7 +93,7 @@ class BarcodeGeneratorService
                 }
                 $product->ean13 = $ean;
                 $product->update();
-                \Configuration::updateValue(\Barcodegenerator::BARCODEGENERATOR_CUSTOM_ID, $id + 1);
+                \Configuration::updateValue(BarcodeConfigurationData::BARCODEGENERATOR_CUSTOM_ID, $id + 1);
 
                 // Variants EAN calculation
                 $attributeIds = \Product::getProductAttributesIds($product->id);
@@ -123,9 +122,9 @@ class BarcodeGeneratorService
      */
     public function genEAN($id_base, int $id_variant = -1)
     {
-        if (\Configuration::get(\Barcodegenerator::BARCODEGENERATOR_COUNTRY_PREFIX) && \Configuration::get(\Barcodegenerator::BARCODEGENERATOR_COMPANY_PREFIX)) {
-            $country_prefix = \Configuration::get(\Barcodegenerator::BARCODEGENERATOR_COUNTRY_PREFIX);
-            $company_prefix = \Configuration::get(\Barcodegenerator::BARCODEGENERATOR_COMPANY_PREFIX);
+        if (\Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_COUNTRY_PREFIX) && \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_COMPANY_PREFIX)) {
+            $country_prefix = \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_COUNTRY_PREFIX);
+            $company_prefix = \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_COMPANY_PREFIX);
         } else {
             return false;
         }

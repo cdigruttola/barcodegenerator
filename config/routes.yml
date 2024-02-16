@@ -1,7 +1,19 @@
+barcode_controller:
+  path: /barcode/configuration
+  methods: [GET]
+  defaults:
+    _controller: 'cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController::index'
+
+barcode_controller_configuration_save:
+  path: /barcode/configuration
+  methods: [POST, PATCH]
+  defaults:
+    _controller: 'cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController::saveConfiguration'
+
 barcode_generate:
-  path: /barcode_generate
+  path: /barcode/generate
   methods: [ GET ]
   defaults:
-    _controller: 'cdigruttola\Module\Barcodegenerator\Controller\Admin\BarcodeGeneratorController::generateAction'
+    _controller: 'cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController::generateAction'
     _legacy_controller: 'BarcodeGeneratorController'
     _legacy_link: 'BarcodeGeneratorController'
