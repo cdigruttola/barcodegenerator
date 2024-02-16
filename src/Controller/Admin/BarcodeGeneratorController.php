@@ -73,7 +73,7 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
      */
     public function saveConfiguration(Request $request): Response
     {
-        $redirectResponse = $this->redirectToRoute('bocustomize_controller');
+        $redirectResponse = $this->redirectToRoute('barcode_controller');
 
         $form = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->getForm();
         $form->handleRequest($request);
@@ -109,23 +109,27 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
      *
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return Response
      *
      * @throws \PrestaShopException
      * @throws \Exception
      */
     public function generateAction(Request $request)
     {
+        $redirectResponse = $this->redirectToRoute('barcode_controller');
+
         /** @var $generator_service BarcodeGeneratorService */
         $generator_service = $this->get('cdigruttola.barcodegenerator.admin.barcode_generator_service');
         try {
             if ($generator_service->generateAndFill()) {
-                return new JsonResponse(['success' => true, 'message' => $this->trans('Barcodes succesfully created', 'Modules.Barcodegenerator.Main')]);
+                $this->addFlash('success', $this->trans('Barcodes succesfully created', 'Modules.Barcodegenerator.Main'));
             } else {
-                return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', 'Modules.Barcodegenerator.Error')]);
+                $this->addFlash('error', $this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', 'Modules.Barcodegenerator.Error'));
             }
         } catch (InvalidArgumentException $ex) {
-            return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage()]);
+            $this->addFlash('error', $this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage());
         }
+
+        return $redirectResponse;
     }
 }
