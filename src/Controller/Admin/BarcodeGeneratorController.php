@@ -41,7 +41,6 @@ if (!defined('_PS_VERSION_')) {
  */
 class BarcodeGeneratorController extends FrameworkBundleAdminController
 {
-
     /**
      * @var array
      */
@@ -58,7 +57,6 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
 
     public function index(): Response
     {
-
         $configurationForm = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->getForm();
 
         return $this->render('@Modules/barcodegenerator/views/templates/admin/index.html.twig', [

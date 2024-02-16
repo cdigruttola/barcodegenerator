@@ -31,19 +31,10 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-use PrestaShop\PrestaShop\Core\Domain\Shop\DTO\ShopLogoSettings;
-use PrestaShopBundle\Form\Admin\Type\ColorPickerType;
-use PrestaShopBundle\Form\Admin\Type\ImagePreviewType;
 use PrestaShopBundle\Form\Admin\Type\SwitchType;
 use PrestaShopBundle\Form\Admin\Type\TranslatorAwareType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class BarcodeConfigurationType extends TranslatorAwareType
 {
@@ -74,12 +65,11 @@ class BarcodeConfigurationType extends TranslatorAwareType
                 'required' => true,
                 'label' => $this->trans('Country Prefix', 'Modules.Barcodegenerator.Main'),
                 'help' => $this->trans('Enter the prefix for EAN (the first three digits of your GS1 prefix)', 'Modules.Barcodegenerator.Main'),
-
             ])
             ->add('company_prefix', NumberType::class, [
                 'required' => true,
                 'label' => $this->trans('Company Prefix', 'Modules.Barcodegenerator.Main'),
-                'help' => $this->trans('Enter the company prefix for EAN (the remaining digits after the first three)','Modules.Barcodegenerator.Main'),
+                'help' => $this->trans('Enter the company prefix for EAN (the remaining digits after the first three)', 'Modules.Barcodegenerator.Main'),
             ]);
     }
 }

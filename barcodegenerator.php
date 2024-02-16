@@ -36,7 +36,6 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 
 class Barcodegenerator extends Module
 {
-
     public function __construct()
     {
         $this->name = 'barcodegenerator';
@@ -44,7 +43,6 @@ class Barcodegenerator extends Module
         $this->version = '2.0.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
-        $this->module_key = '05df11732203e6e6bcdb690348257aa7';
 
         $this->bootstrap = true;
 
@@ -85,5 +83,4 @@ class Barcodegenerator extends Module
     {
         Tools::redirectAdmin(SymfonyContainer::getInstance()->get('router')->generate('barcode_controller'));
     }
-
 }
