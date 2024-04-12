@@ -2,7 +2,7 @@
 <module>
 	<name>barcodegenerator</name>
 	<displayName><![CDATA[Barcode Generator]]></displayName>
-	<version><![CDATA[2.0.0]]></version>
+	<version><![CDATA[2.0.1]]></version>
 	<description><![CDATA[A module to generate barcode]]></description>
 	<author><![CDATA[cdigruttola]]></author>
 	<tab><![CDATA[market_place]]></tab>
