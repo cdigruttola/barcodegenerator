@@ -100,12 +100,14 @@ class BarcodeGeneratorService
                 if (!empty($attributeIds)) {
                     for ($i = 0; $i < count($attributeIds); ++$i) {
                         $combination = new \CombinationCore($attributeIds[$i]['id_product_attribute']);
-                        $ean = $this->genEAN($id, $i + 1);
-                        if (!$ean) {
-                            return false;
+                        if(!isset($combination->ean13) || $replace_existing) {
+                            $ean = $this->genEAN($id, $i + 1);
+                            if (!$ean) {
+                                return false;
+                            }
+                            $combination->ean13 = $ean;
+                            $combination->update();
                         }
-                        $combination->ean13 = $ean;
-                        $combination->update();
                     }
                 }
             }
