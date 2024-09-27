@@ -40,7 +40,7 @@ class Barcodegenerator extends Module
     {
         $this->name = 'barcodegenerator';
         $this->tab = 'market_place';
-        $this->version = '2.0.1';
+        $this->version = '2.0.2';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
