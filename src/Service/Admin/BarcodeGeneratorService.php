@@ -72,9 +72,9 @@ class BarcodeGeneratorService
     {
         $replace_existing = \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_REPLACE_CODE);
 
-        $sql = 'SELECT `id_product`, `ean13` FROM `' . _DB_PREFIX_ . 'product` ';
+        $sql = 'SELECT p.id_product, p.ean13 product_ean, pa.ean13 combination_ean FROM `' . _DB_PREFIX_ . 'product` p LEFT JOIN `' . _DB_PREFIX_ . 'product_attribute` pa on p.id_product = pa.id_product ';
         if (!$replace_existing) {
-            $sql .= ' WHERE `ean13` = "" OR `ean13` IS NULL';
+            $sql .= ' WHERE (p.ean13 = "" OR p.ean13 IS NULL) OR (pa.id_product_attribute IS NOT NULL AND (pa.ean13 = "" OR pa.ean13 IS NULL)) ';
         }
 
         $raw_products = \Db::getInstance()->executeS($sql);
@@ -82,30 +82,36 @@ class BarcodeGeneratorService
         foreach ($raw_products as $raw_product) {
             $product = new \Product($raw_product['id_product']);
 
-            if ($replace_existing || !$raw_product['ean13']) {
+            if ($replace_existing || !$raw_product['product_ean'] || !$raw_product['combination_ean']) {
                 $id = $product->id;
                 if (\Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID)) {
                     $id = (int) \Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_CUSTOM_ID);
                 }
-                $ean = $this->genEAN($id);
-                if (!$ean) {
-                    return false;
+                if ($replace_existing || !$raw_product['product_ean']) {
+                    $ean = $this->genEAN($id);
+                    if (!$ean) {
+                        return false;
+                    }
+                    $product->ean13 = $ean;
+                    $product->update();
                 }
-                $product->ean13 = $ean;
-                $product->update();
-                \Configuration::updateValue(BarcodeConfigurationData::BARCODEGENERATOR_CUSTOM_ID, $id + 1);
+                if (\Configuration::get(BarcodeConfigurationData::BARCODEGENERATOR_ID_PRODUCT_OR_CUSTOM_ID)) {
+                    \Configuration::updateValue(BarcodeConfigurationData::BARCODEGENERATOR_CUSTOM_ID, $id + 1);
+                }
 
                 // Variants EAN calculation
                 $attributeIds = \Product::getProductAttributesIds($product->id);
                 if (!empty($attributeIds)) {
                     for ($i = 0; $i < count($attributeIds); ++$i) {
                         $combination = new \CombinationCore($attributeIds[$i]['id_product_attribute']);
-                        $ean = $this->genEAN($id, $i + 1);
-                        if (!$ean) {
-                            return false;
+                        if($replace_existing || !$combination->ean13) {
+                            $ean = $this->genEAN($id, $i + 1);
+                            if (!$ean) {
+                                return false;
+                            }
+                            $combination->ean13 = $ean;
+                            $combination->update();
                         }
-                        $combination->ean13 = $ean;
-                        $combination->update();
                     }
                 }
             }

@@ -32,7 +32,6 @@ use PrestaShop\PrestaShop\Core\Form\FormHandlerInterface;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -109,7 +108,7 @@ class BarcodeGeneratorController extends PrestashopAdminController
     /**
      * #[AdminSecurity("is_granted('read', request.get('_legacy_controller'))")
      *
-     * @return JsonResponse
+     * @return Response
      *
      * @throws \PrestaShopException
      * @throws \Exception
