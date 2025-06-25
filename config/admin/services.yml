@@ -11,9 +11,10 @@ services:
 
   cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController:
     public: true
+    autowire: true
+    autoconfigure: true
     class: cdigruttola\Barcodegenerator\Controller\Admin\BarcodeGeneratorController
     arguments:
-      - "@=service('prestashop.adapter.legacy.context').getLanguages(false)"
       - "@cdigruttola.barcodegenerator.module"
 
   cdigruttola.barcodegenerator.admin.barcode_generator_service:

@@ -40,7 +40,7 @@ class Barcodegenerator extends Module
     {
         $this->name = 'barcodegenerator';
         $this->tab = 'market_place';
-        $this->version = '2.0.0';
+        $this->version = '3.0.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
@@ -53,7 +53,7 @@ class Barcodegenerator extends Module
 
         $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', [], 'Modules.Barcodegenerator.Main');
 
-        $this->ps_versions_compliancy = ['min' => '1.7.8', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '9.0.0', 'max' => _PS_VERSION_];
     }
 
     public function isUsingNewTranslationSystem()

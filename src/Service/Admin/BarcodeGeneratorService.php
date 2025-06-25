@@ -148,7 +148,7 @@ class BarcodeGeneratorService
         $sum = 0;
         for ($i = \Tools::strlen($ean) - 1; $i >= 0; --$i) {
             if ($i % 2 !== 0) {
-                $sum += ($ean[$i] * 3);
+                $sum += (((int) $ean[$i]) * 3);
             } else {
                 $sum += (int) $ean[$i];
             }

@@ -23,11 +23,14 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
+declare(strict_types=1);
+
 namespace cdigruttola\Barcodegenerator\Controller\Admin;
 
 use cdigruttola\Barcodegenerator\Service\Admin\BarcodeGeneratorService;
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use PrestaShopBundle\Security\Annotation\AdminSecurity;
+use PrestaShop\PrestaShop\Core\Form\FormHandlerInterface;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpClient\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,25 +42,21 @@ if (!defined('_PS_VERSION_')) {
 /**
  * Controller responsible for barcode generation.
  */
-class BarcodeGeneratorController extends FrameworkBundleAdminController
+class BarcodeGeneratorController extends PrestashopAdminController
 {
-    /**
-     * @var array
-     */
-    private $languages;
-    /** @var \Module */
+    /** @var \Barcodegenerator */
     private $module;
 
-    public function __construct($languages, $module)
+    public function __construct($module)
     {
-        parent::__construct();
-        $this->languages = $languages;
         $this->module = $module;
     }
 
-    public function index(): Response
-    {
-        $configurationForm = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->getForm();
+    public function index(
+        #[Autowire(service: 'cdigruttola.barcodegenerator.form.configuration_type.form_handler')]
+        FormHandlerInterface $formHandler,
+    ): Response {
+        $configurationForm = $formHandler->getForm();
 
         return $this->render('@Modules/barcodegenerator/views/templates/admin/index.html.twig', [
             'form' => $configurationForm->createView(),
@@ -71,11 +70,14 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
      *
      * @return Response
      */
-    public function saveConfiguration(Request $request): Response
-    {
-        $redirectResponse = $this->redirectToRoute('bocustomize_controller');
+    public function saveConfiguration(
+        Request $request,
+        #[Autowire(service: 'cdigruttola.barcodegenerator.form.configuration_type.form_handler')]
+        FormHandlerInterface $formHandler,
+    ): Response {
+        $redirectResponse = $this->redirectToRoute('barcode_controller');
 
-        $form = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->getForm();
+        $form = $formHandler->getForm();
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
@@ -84,10 +86,10 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
 
         if ($form->isValid()) {
             $data = $form->getData();
-            $saveErrors = $this->get('cdigruttola.barcodegenerator.form.configuration_type.form_handler')->save($data);
+            $saveErrors = $formHandler->save($data);
 
             if (0 === count($saveErrors)) {
-                $this->addFlash('success', $this->trans('Successful update.', 'Admin.Notifications.Success'));
+                $this->addFlash('success', $this->trans('Successful update.', [], 'Admin.Notifications.Success'));
 
                 return $redirectResponse;
             }
@@ -99,33 +101,34 @@ class BarcodeGeneratorController extends FrameworkBundleAdminController
             $formErrors[] = $error->getMessage();
         }
 
-        $this->flashErrors($formErrors);
+        $this->addFlashErrors($formErrors);
 
         return $redirectResponse;
     }
 
     /**
-     * @AdminSecurity("is_granted('read', request.get('_legacy_controller'))")
-     *
-     * @param Request $request
+     * #[AdminSecurity("is_granted('read', request.get('_legacy_controller'))")
      *
      * @return JsonResponse
      *
      * @throws \PrestaShopException
      * @throws \Exception
      */
-    public function generateAction(Request $request)
-    {
-        /** @var $generator_service BarcodeGeneratorService */
-        $generator_service = $this->get('cdigruttola.barcodegenerator.admin.barcode_generator_service');
+    public function generateAction(
+        #[Autowire(service: 'cdigruttola.barcodegenerator.admin.barcode_generator_service')]
+        BarcodeGeneratorService $generator_service,
+    ): Response {
+        $redirectResponse = $this->redirectToRoute('barcode_controller');
         try {
             if ($generator_service->generateAndFill()) {
-                return new JsonResponse(['success' => true, 'message' => $this->trans('Barcodes succesfully created', 'Modules.Barcodegenerator.Main')]);
+                $this->addFlash('success', $this->trans('Barcodes succesfully created', [], 'Modules.Barcodegenerator.Main'));
             } else {
-                return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', 'Modules.Barcodegenerator.Error')]);
+                $this->addFlash('error', $this->trans('An error occurred during barcode generation, please check if country and company prefixes are set', [], 'Modules.Barcodegenerator.Error'));
             }
         } catch (InvalidArgumentException $ex) {
-            return new JsonResponse(['success' => false, 'message' => $this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes', 'Modules.Barcodegenerator.Error') . $ex->getMessage()]);
+            $this->addFlash('error', $this->trans('An error occurred during barcode generation, due to limit implementation you can only generate EAN 13 codes for combination products where sum of id length for base product and length of digits of combinations number does not exceed 12 minus sum of length of prefixes. Error message %s', [$ex->getMessage()], 'Modules.Barcodegenerator.Error'));
         }
+
+        return $redirectResponse;
     }
 }
